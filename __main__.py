@@ -80,10 +80,10 @@ def handle_stop(call):
     )
 
 while True:
-    #try:
+    try:
         bot.polling(none_stop=True)
 
-    #except Exception as e:
-    #    print('Bot polling error:', e)
-    #    time.sleep(5)
+    except Exception as e:
+        print('Bot polling error:', e)
+        time.sleep(5)
 
