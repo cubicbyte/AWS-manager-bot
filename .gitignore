@@ -1,0 +1,6 @@
+**/__pycache__
+.env
+whitelist.txt
+
+*.code-workspace
+/dev
