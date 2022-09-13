@@ -21,9 +21,15 @@ bot.add_custom_filter(IsWhitelisted())
 
 
 
-@bot.message_handler(func=lambda m: True, is_whitelisted=False)
 @bot.callback_query_handler(func=lambda call: True, is_whitelisted=False)
-def not_whitelisted(message):
+def not_whitelisted_cb(call):
+    bot.edit_message_text(
+        **not_whitelisted_message(call.message),
+        message_id=call.message.message_id
+    )
+
+@bot.message_handler(func=lambda m: True, is_whitelisted=False)
+def not_whitelisted_msg(message):
     bot.send_message(**not_whitelisted_message(message))
 
 
@@ -45,8 +51,8 @@ def handle_start(call):
     instance = res.Instance(os.getenv('INSTANCE_ID'))
     state = instance.state['Name']
 
-    if not state != 'running':
-        bot.answer_callback_query(
+    if state != 'stopped':
+        return bot.answer_callback_query(
             callback_query_id=call.id,
             show_alert=True,
             text=messages['TEXT_ALREADY_RUNNING']
@@ -65,8 +71,8 @@ def handle_stop(call):
     instance = res.Instance(os.getenv('INSTANCE_ID'))
     state = instance.state['Name']
 
-    if not state != 'stopped':
-        bot.answer_callback_query(
+    if state != 'running':
+        return bot.answer_callback_query(
             callback_query_id=call.id,
             show_alert=True,
             text=messages['TEXT_ALREADY_STOPPED']

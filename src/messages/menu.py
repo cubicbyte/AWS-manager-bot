@@ -7,8 +7,8 @@ from ..load_messages import messages
 
 states = {
     'running': 'TEXT_RUNNING',
-    'starting': 'TEXT_STARTING',
-    'polling': 'TEXT_STOPPING',
+    'pending': 'TEXT_STARTING',
+    'stopping': 'TEXT_STOPPING',
     'stopped': 'TEXT_STOPPED'
 }
 
