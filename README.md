@@ -1,4 +1,4 @@
-# AWS-minecraft-tg-bot
+# AWS-manager-bot
 
 A bot that can help manage your AWS instance
 
